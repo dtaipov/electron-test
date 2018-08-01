@@ -26,17 +26,10 @@
           ipcRenderer.send('text:to_sub_window', item);
         }
 
-        ipcRenderer.on('text:to_sub_window', function(e, item) {
+        ipcRenderer.on('text:to_sub_window_from_main', function(e, item) {
           console.log("add window item: ", item);
           document.querySelector("#item").value = item;
-          //if (item === "reply") {
-            //ipcRenderer.send('text:reply_to_first_window', "reply from second window");
-          //}
         });
-
-        //ipcRenderer.on('text:reply_to_first_window', function(e, item) {
-          //document.querySelector("#item").value = item;
-        //});
 
         ipcRenderer.on('item:clear', () => {
           console.log("add window item clear");

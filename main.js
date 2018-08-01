@@ -46,15 +46,9 @@ app.on('ready', () => {
 ipcMain.on('text:to_sub_window', (e, item) => {
   console.log("Main e.sender: ", e);
   // mainWindow.webContents.send('item:add', item);
-  firstWindow.webContents.send('text:to_sub_window', item);
-  secondWindow.webContents.send('text:to_sub_window', item);
-  //firstWindow.close();
+  firstWindow.webContents.send('text:to_sub_window_from_main', item);
+  secondWindow.webContents.send('text:to_sub_window_from_main', item);
 });
-
-/*ipcMain.on('text:reply_to_first_window', (e, item) => {
-  mainWindow.webContents.send('item:add', item);
-  firstWindow.webContents.send('text:reply_to_first_window', item);
-});*/
 
 const mainMenuTemplate = [
   {
