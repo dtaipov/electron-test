@@ -22,8 +22,11 @@
 
         function submitForm(e) {
           e.preventDefault();
+          const windowName = electron.remote.getCurrentWindow().custom.windowName;
+          console.log("windowName: ", windowName);
+
           const item = document.querySelector("#item").value;
-          ipcRenderer.send('text:to_sub_window', item);
+          ipcRenderer.send('text:to_sub_window:' + windowName, item);
         }
 
         ipcRenderer.on('text:to_sub_window_from_main', function(e, item) {

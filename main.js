@@ -20,6 +20,9 @@ app.on('ready', () => {
 
   firstWindow = new BrowserWindow({title: "First window", width: 300, height: 200});
   firstWindow.loadURL(url.format({pathname: path.join(__dirname, 'addWindow.html'), protocol: 'file:', slashes: true}));
+  firstWindow.custom = {
+    windowName: 'fistWindow'
+  };
 
   firstWindow.on('close', () => {
     firstWindow = null;
@@ -27,6 +30,9 @@ app.on('ready', () => {
 
   secondWindow = new BrowserWindow({title: "Second window", width: 300, height: 200});
   secondWindow.loadURL(url.format({pathname: path.join(__dirname, 'addWindow.html'), protocol: 'file:', slashes: true}));
+  secondWindow.custom = {
+    windowName: 'secondWindow'
+  };
 
   secondWindow.on('close', () => {
     secondWindow = null;
@@ -43,11 +49,12 @@ app.on('ready', () => {
 };*/
 
 
-ipcMain.on('text:to_sub_window', (e, item) => {
-  console.log("Main e.sender: ", e);
-  // mainWindow.webContents.send('item:add', item);
-  firstWindow.webContents.send('text:to_sub_window_from_main', item);
+ipcMain.on('text:to_sub_window:fistWindow', (e, item) => {
   secondWindow.webContents.send('text:to_sub_window_from_main', item);
+});
+
+ipcMain.on('text:to_sub_window:secondWindow', (e, item) => {
+  firstWindow.webContents.send('text:to_sub_window_from_main', item);
 });
 
 const mainMenuTemplate = [
