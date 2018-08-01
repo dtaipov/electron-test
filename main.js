@@ -49,12 +49,12 @@ app.on('ready', () => {
 };*/
 
 
-ipcMain.on('text:to_sub_window:fistWindow', (e, item) => {
-  secondWindow.webContents.send('text:to_sub_window_from_main', item);
+ipcMain.on('text:fistWindow', (e, item) => {
+  secondWindow.webContents.send('text:secondWindow', item);
 });
 
-ipcMain.on('text:to_sub_window:secondWindow', (e, item) => {
-  firstWindow.webContents.send('text:to_sub_window_from_main', item);
+ipcMain.on('text:secondWindow', (e, item) => {
+  firstWindow.webContents.send('text:firstWindow', item);
 });
 
 const mainMenuTemplate = [

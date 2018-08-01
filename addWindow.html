@@ -26,10 +26,15 @@
           console.log("windowName: ", windowName);
 
           const item = document.querySelector("#item").value;
-          ipcRenderer.send('text:to_sub_window:' + windowName, item);
+          ipcRenderer.send('text:' + windowName, item);
         }
 
-        ipcRenderer.on('text:to_sub_window_from_main', function(e, item) {
+        ipcRenderer.on('text:firstWindow', (e, item) => {
+          console.log("add window item: ", item);
+          document.querySelector("#item").value = item;
+        });
+
+        ipcRenderer.on('text:secondWindow', (e, item) => {
           console.log("add window item: ", item);
           document.querySelector("#item").value = item;
         });
